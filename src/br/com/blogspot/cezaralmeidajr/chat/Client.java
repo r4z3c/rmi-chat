@@ -8,40 +8,34 @@ import java.rmi.registry.LocateRegistry;
 
 public class Client {
 
-	public class MessagePool implements Runnable {
-
-		private Long lastMessageId = 0L;
-		private IChat chat;
-
-		public MessagePool(IChat chat){
-			this.chat = chat;
-		}
-
-		public void run(){
-			while(true){
-				for(IMessage message : chat.getMessages()){
-					if(message.getId() > this.lastMessageId){
-						this.lastMessageId = message.getId();
-						System.out.println(message.toString());
-					}
-				}
-
-				Thread.sleep(5000);
-			}
-		}
-	}
-
 	public static void main(String args[]){
 		try {
-			System.out.println("Starting chat client");
+			System.out.println("|i| Starting chat client");
+
+			if(args.length < 2){
+				throw new Exception("|E| Expected 'author' and 'message' args");
+			}
 
 			Registry registry = LocateRegistry.getRegistry(1099);
 			IChat chat = (IChat) registry.lookup("Chat");
 
-			MessagePool messagePool = new MessagePool(chat);
-			Thread messagePoolThread = new Thread(messagePool);
-			messagePoolThread.start();
+			System.out.println("|i| Fetching server messages");
+
+			for(IMessage message : chat.getMessages()){
+				System.out.println(message.toString());
+			}
+
+			System.out.println("|i| Sending your message");
+
+			chat.sendMessage(args[0], args[1]);
+
+			System.out.println("|i| Fetching server messages");
+
+			for(IMessage message : chat.getMessages()){
+				System.out.println(message.toString());
+			}
 		}catch(Exception e){
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	}

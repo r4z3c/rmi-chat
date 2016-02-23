@@ -8,7 +8,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Chat implements IChat {
+public class Server implements IChat {
 
 	private static List<IMessage> messages = new ArrayList<IMessage>();
 
@@ -22,15 +22,15 @@ public class Chat implements IChat {
 
 	public static void main(String args[]){
 		try {
-			System.out.println("Starting chat server");
+			System.out.println("|i| Starting chat server");
 
-			Chat chat = new Chat();
-			IChat stub = (IChat) UnicastRemoteObject.exportObject(chat,0);
+			Server server = new Server();
+			IChat stub = (IChat) UnicastRemoteObject.exportObject(server,0);
 
 			Registry registry = LocateRegistry.createRegistry(1099);
 			registry.rebind("Chat", stub);
 
-			System.out.println("Chat server online");
+			System.out.println("|i| Chat server online");
 		} catch(Exception e){
 			e.printStackTrace();
 		}
