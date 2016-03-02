@@ -1,0 +1,11 @@
+INITIAL_DIR=`pwd`
+RMI_CHAT_HOME=/home/r4z3c/Projetos/github/r4z3c/rmi-chat
+RMI_CHAT_CORE_PATH=$RMI_CHAT_HOME/dist/core.jar
+RMI_CHAT_CLIENT_PATH=$RMI_CHAT_HOME/dist/client.jar
+
+bin/build_core
+
+echo "|i| Building client"
+
+javac -cp $RMI_CHAT_CORE_PATH src/br/com/blogspot/cezaralmeidajr/chat/client/*.java -d bin/
+jar cfv $RMI_CHAT_CLIENT_PATH -C bin/ br/com/blogspot/cezaralmeidajr/chat/client/Chat.class -C bin/ br/com/blogspot/cezaralmeidajr/chat/client/CallbackHandler.class -C bin/ br/com/blogspot/cezaralmeidajr/chat/client/Message.class > /dev/null

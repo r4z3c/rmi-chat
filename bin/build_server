@@ -1,0 +1,11 @@
+INITIAL_DIR=`pwd`
+RMI_CHAT_HOME=/home/r4z3c/Projetos/github/r4z3c/rmi-chat
+RMI_CHAT_CORE_PATH=$RMI_CHAT_HOME/dist/core.jar
+RMI_CHAT_SERVER_PATH=$RMI_CHAT_HOME/dist/server.jar
+
+bin/build_core
+
+echo "|i| Building server"
+
+javac -cp $RMI_CHAT_CORE_PATH src/br/com/blogspot/cezaralmeidajr/chat/server/*.java -d bin/
+jar cfv $RMI_CHAT_SERVER_PATH -C bin/ br/com/blogspot/cezaralmeidajr/chat/server/Chat.class > /dev/null
