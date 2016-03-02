@@ -3,7 +3,7 @@ RMI_CHAT_HOME=/home/r4z3c/Projetos/github/r4z3c/rmi-chat
 RMI_CHAT_CORE_PATH=$RMI_CHAT_HOME/dist/core.jar
 RMI_CHAT_SERVER_PATH=$RMI_CHAT_HOME/dist/server.jar
 
-bin/build_core
+bin/build_client
 
 echo "|i| Building server"
 

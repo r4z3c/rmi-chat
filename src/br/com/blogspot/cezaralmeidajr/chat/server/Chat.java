@@ -34,7 +34,7 @@ public class Chat implements IChat {
 		return false;
 	}
 
-	private void notifyClientsChange(){
+	private void notifyClientsChange() throws RemoteException {
 		for(ICallbackHandler callbackHandler : this.callbackHandlers){
 			callbackHandler.clientsChanged(this.clients);
 		}
@@ -51,6 +51,7 @@ public class Chat implements IChat {
 	public boolean registerCallbackHandler(ICallbackHandler callbackHandler) throws RemoteException {
 		if(!this.callbackHandlers.contains(callbackHandler)){
 			this.callbackHandlers.add(callbackHandler);
+			callbackHandler.clientsChanged(this.clients);
 			return true;
 		}
 

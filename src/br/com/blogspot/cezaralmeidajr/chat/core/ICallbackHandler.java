@@ -1,13 +1,14 @@
 package br.com.blogspot.cezaralmeidajr.chat.core;
 
-import java.io.Serializable;
 import java.util.List;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 
-public interface ICallbackHandler extends Serializable {
+public interface ICallbackHandler extends Remote {
 
-	public Client getClient();
-	public void messageReceived(IMessage message);
-	public void clientsChanged(List<Client> clients);
-	public boolean equals(Object object);
+	public Client getClient() throws RemoteException;
+	public List<Client> getClients() throws RemoteException;
+	public void messageReceived(IMessage message) throws RemoteException;
+	public void clientsChanged(List<Client> clients) throws RemoteException;
 
 }

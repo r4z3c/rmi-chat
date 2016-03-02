@@ -8,8 +8,9 @@ public class Message implements IMessage {
 	private Client target;
 	private String body;
 
-	public Message(Client author, String body){
+	public Message(Client author, Client target, String body){
 		this.author = author;
+		this.target = target;
 		this.body = body;
 	}
 
